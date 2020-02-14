@@ -59,7 +59,28 @@ public class GameManager
         return win;
     }
 
+    public boolean isLoose()
+    {
+        boolean ret = false;
 
+        for (int i = 0; i < gameGrid.getAllTiles().size(); i++)
+        {
+            for (int j = 0; j < gameGrid.getAllTiles().get(i).size(); j++)
+            {
+                Tile t = gameGrid.getAllTiles().get(i).get(j);
+                if(i - 1 >= 0)
+                    ret |= t.equals(gameGrid.getAllTiles().get(i - 1).get(j));
+                if(i + 1 < gameGrid.getAllTiles().size())
+                    ret |= t.equals(gameGrid.getAllTiles().get(i + 1).get(j));
+                if(j + 1 < gameGrid.getAllTiles().get(i).size())
+                    ret |= t.equals(gameGrid.getAllTiles().get(i).get(j + 1));
+                if(j - 1 >= 0)
+                    ret |= t.equals(gameGrid.getAllTiles().get(i).get(j - 1));
+            }
+        }
+
+        return ret;
+    }
 
     public void setEndValue(int endValue)
     {
