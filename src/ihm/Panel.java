@@ -22,6 +22,7 @@ public class Panel extends JPanel
     public Panel(GameGrid grid)
     {
         super();
+        this.setPreferredSize(new Dimension(800,800));
         this.grid = grid;
 
         attributes = new HashMap<>();
