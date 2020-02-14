@@ -1,14 +1,26 @@
+import ihm.IHM;
+
+import javax.swing.*;
+
 public class Main
 {
-    
+
     public static void main(String[] args)
     {
-
-    }
-
-    public static void show()
-    {
-
+        SwingUtilities.invokeLater(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                try
+                {
+                    new IHM();
+                } catch (InterruptedException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
 }

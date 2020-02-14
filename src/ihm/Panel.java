@@ -1,6 +1,7 @@
 package ihm;
 
 import bo.GameGrid;
+import bo.GameManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,16 +15,16 @@ public class Panel extends JPanel
     private int                        fontSize = 40;
     private int colorNumber = 10;
     private Font                       font;
-    private GameGrid                   grid;
     private Map<TextAttribute, Object> attributes;
     private Color colorBase = new Color(0.9f,0.85f,0.8f);
     private ArrayList<Color> colorList;
+    private GameManager gm;
 
-    public Panel(GameGrid grid)
+    public Panel(GameManager gm)
     {
         super();
         this.setPreferredSize(new Dimension(800,800));
-        this.grid = grid;
+        this.gm = gm;
 
         attributes = new HashMap<>();
 
@@ -58,7 +59,7 @@ public class Panel extends JPanel
         {
             for (int x = 0; x < 4; x++)
             {
-                String value = grid.getATile(y,x).toString();
+                String value = gm.getGameGrid().getATile(y,x).toString();
                 if(!value.equals("")){
                     int quotient = 0;
                     int reste = Integer.parseInt(value);
