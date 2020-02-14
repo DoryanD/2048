@@ -58,77 +58,79 @@ public class GameGrid
         switch (direction)
         {
             case DOWN:
-            case RIGHT:
-                for (List<Tile> allTile : allTiles)
+                for (int i = allTiles.size()  -1; i >= 0; i--)
                 {
-                    for (Tile t : allTile)
+                    for (int k = 0; k < allTiles.get(i).size(); k++)
                     {
-                        switch (direction)
+                        Tile t = allTiles.get(i).get(k);
+                        if (t.getY() + 1 < height)
                         {
-                            case DOWN:
-                                if (t.getY() + 1 < height)
-                                {
-                                    Tile t2 = getATile(t.getY() + 1, t.getX());
-                                    if (t2.equals(t))
-                                        t2.add(t);
-                                    else if (t2.getValue() == 0)
-                                    {
-                                        t2.setValue(t.getValue());
-                                        t.setValue(0);
-                                    }
-                                }
-                                break;
-                            case RIGHT:
-                                if (t.getX() + 1 < width)
-                                {
-                                    Tile t2 = getATile(t.getY(), t.getX() + 1);
-                                    if (t2.equals(t))
-                                        t2.add(t);
-                                    else if (t2.getValue() == 0)
-                                    {
-                                        t2.setValue(t.getValue());
-                                        t.setValue(0);
-                                    }
-                                }
-                                break;
+                            Tile t2 = getATile(t.getY() + 1, t.getX());
+                            if (t2.equals(t))
+                                t2.add(t);
+                            else if (t2.getValue() == 0)
+                            {
+                                t2.setValue(t.getValue());
+                                t.setValue(0);
+                            }
+                        }
+                    }
+                }
+                break;
+            case RIGHT:
+                for (int i = 0; i < allTiles.size(); i++)
+                {
+                    for (int k = allTiles.get(i).size() -1; k >= 0; k--)
+                    {
+                        Tile t = allTiles.get(i).get(k);
+                        if (t.getX() + 1 < width)
+                        {
+                            Tile t2 = getATile(t.getY(), t.getX() + 1);
+                            if (t2.equals(t))
+                                t2.add(t);
+                            else if (t2.getValue() == 0)
+                            {
+                                t2.setValue(t.getValue());
+                                t.setValue(0);
+                            }
                         }
                     }
                 }
             case UP:
-            case LEFT:
-                for (int i = allTiles.size() - 1; i >= 0; i--)
+                for (int i = 0; i < allTiles.size(); i++)
                 {
-                    for (int k = allTiles.get(i).size() - 1; k >= 0; k--)
+                    for (int k = 0; k < allTiles.get(i).size(); k++)
                     {
                         Tile t = allTiles.get(i).get(k);
-                        switch (direction)
+                        if (t.getY() - 1 >= 0)
                         {
-                            case UP:
-                                if (t.getY() - 1 >= 0)
-                                {
-                                    Tile t2 = getATile(t.getY() - 1, t.getX());
-                                    if (t2.equals(t))
-                                        t2.add(t);
-                                    else if (t2.getValue() == 0)
-                                    {
-                                        t2.setValue(t.getValue());
-                                        t.setValue(0);
-                                    }
-                                }
-                                break;
-                            case LEFT:
-                                if (t.getX() - 1 >= 0)
-                                {
-                                    Tile t2 = getATile(t.getY(), t.getX() - 1);
-                                    if (t2.equals(t))
-                                        t2.add(t);
-                                    else if (t2.getValue() == 0)
-                                    {
-                                        t2.setValue(t.getValue());
-                                        t.setValue(0);
-                                    }
-                                }
-                                break;
+                            Tile t2 = getATile(t.getY() - 1, t.getX());
+                            if (t2.equals(t))
+                                t2.add(t);
+                            else if (t2.getValue() == 0)
+                            {
+                                t2.setValue(t.getValue());
+                                t.setValue(0);
+                            }
+                        }
+                    }
+                }
+            case LEFT:
+                for (int i = 0; i < allTiles.size(); i++)
+                {
+                    for (int k = 0; k < allTiles.get(i).size(); k++)
+                    {
+                        Tile t = allTiles.get(i).get(k);
+                        if (t.getX() - 1 >= 0)
+                        {
+                            Tile t2 = getATile(t.getY(), t.getX() - 1);
+                            if (t2.equals(t))
+                                t2.add(t);
+                            else if (t2.getValue() == 0)
+                            {
+                                t2.setValue(t.getValue());
+                                t.setValue(0);
+                            }
                         }
                     }
                 }
