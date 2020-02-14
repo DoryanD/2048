@@ -1,35 +1,48 @@
 package ihm;
 
+import bo.GameGrid;
+import res.Direction;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.font.TextAttribute;
+import java.util.HashMap;
+import java.util.Map;
 
 public class IHM extends JFrame
 {
 
-    private Long startTime;
-    private Long animationDuration = 10l;
-    private boolean isRunning = true;
+    private GameGrid                   grid;
+    private Long                       startTime;
+    private Long                       animationDuration = 10l;
+    private boolean                    isRunning         = true;
 
     public IHM() throws InterruptedException
     {
-        super("Snake");
-        this.setSize(800,800);
+        super("2048");
+        this.setSize(800, 800);
         addWindowListener(new WindowAdapter()
                           {
                               public void windowClosing(WindowEvent e)
                               {
-                                  isRunning = false;
-                                  System.out.println("coucou");
-                                  dispose(); System.exit(0);
+                                  dispose();
+                                  System.exit(0);
                               }
                           }
         );
 
         this.setLocationRelativeTo(null);
+        grid = new GameGrid();
+        Panel panel = new Panel(grid);
+
+        this.setContentPane(panel);
+
+        this.getContentPane().setPreferredSize(new Dimension(800,800));
+        this.pack();
         this.setVisible(true);
 
         addKeyListener(new KeyListener()
@@ -42,8 +55,22 @@ public class IHM extends JFrame
             @Override
             public void keyPressed(KeyEvent e)
             {
-                if(e.getKeyChar() == 'z'){
-                    Render();
+                if (e.getKeyChar() == 'z')
+                {
+                    grid.move(Direction.UP);
+                    repaint();
+                }
+                else if(e.getKeyChar() == 's'){
+                    grid.move(Direction.DOWN);
+                    repaint();
+                }
+                else if(e.getKeyChar() == 'd'){
+                    grid.move(Direction.RIGHT);
+                    repaint();
+                }
+                else if(e.getKeyChar() == 'q'){
+                    grid.move(Direction.LEFT);
+                    repaint();
                 }
             }
 
@@ -54,7 +81,7 @@ public class IHM extends JFrame
             }
         });
 
-        this.Render();
+        //this.Render();
 
         /*this.startTime = System.currentTimeMillis();
 
@@ -90,17 +117,5 @@ public class IHM extends JFrame
     private void Render()
     {
         repaint();
-    }
-
-    @Override
-    public void paint(Graphics g){
-        super.paint(g);
-        g.setColor(Color.RED);
-        Rectangle r =g.getClipBounds();
-        System.out.println(r.getHeight());
-        System.out.println(r.getWidth());
-        g.setClip(r);
-        g.fillRect(700, 5, 95, 95);
-        System.out.println("test");
     }
 }
