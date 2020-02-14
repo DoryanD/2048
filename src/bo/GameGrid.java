@@ -159,7 +159,7 @@ public class GameGrid
         Tile aTile = allTiles.get((int) (Math.random() * height)).get((int) (Math.random() * width));
         while (aTile.getValue() != 0)
             aTile = allTiles.get((int) (Math.random() * height)).get((int) (Math.random() * width));
-        //aTile.initValue();
+        aTile.initValue();
     }
 
     public Tile getATile(int y, int x)
