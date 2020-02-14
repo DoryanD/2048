@@ -3,7 +3,7 @@ package bo;
 public class Tile
 {
 
-    private int value;
+    private int         value;
     private Coordinates coordinates;
 
     public Tile(int x, int y)
@@ -11,14 +11,23 @@ public class Tile
         this.coordinates = new Coordinates(x, y);
     }
 
-    public void add(Tile c)
+    public void add(Tile t)
     {
-        this.setValue(c.getValue() + this.getValue());
+        this.setValue(t.getValue() + this.getValue());
+        t.setValue(0);
     }
 
     public void initValue()
     {
         this.value = 2;
+    }
+
+    @Override
+    public boolean equals(Object obj)
+    {
+        if(!(obj instanceof Tile)) return false;
+        if(this.value == 0 || ((Tile) obj).getValue() == 0) return false;
+        return this.value == ((Tile) obj).getValue();
     }
 
     @Override
@@ -32,6 +41,16 @@ public class Tile
         return coordinates;
     }
 
+    public void setX(int x)
+    {
+        this.coordinates.setX(x);
+    }
+
+    public void setY(int y)
+    {
+        this.coordinates.setX(y);
+    }
+
     public int getX()
     {
         return this.coordinates.getX();
@@ -40,17 +59,6 @@ public class Tile
     public int getY()
     {
         return this.coordinates.getY();
-    }
-
-
-    public void addToX(int val)
-    {
-        this.coordinates.setX(this.coordinates.getX() + val);
-    }
-
-    public void addToY(int val)
-    {
-        this.coordinates.setY(this.coordinates.getY() + val);
     }
 
     public int getValue()

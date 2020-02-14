@@ -18,6 +18,7 @@ public class GameGrid
         this.width = 4;
         this.height = 4;
         this.nbTilesInit = 3;
+        init();
     }
 
     public GameGrid(int width, int height, int nbTilesInit)
@@ -25,16 +26,17 @@ public class GameGrid
         this.width = width;
         this.height = height;
         this.nbTilesInit = nbTilesInit;
+        init();
     }
 
-    public void init()
+    private void init()
     {
-        for (int i = 0; i < width; i++)
+        for (int i = 0; i < height; i++)
         {
             List<Tile> aLine = new ArrayList<>();
-            for (int k = 0; k < height; k++)
+            for (int k = 0; k < width; k++)
             {
-                aLine.add(new Tile(i, k));
+                aLine.add(new Tile(k, i));
             }
             allTiles.add(aLine);
         }
@@ -43,6 +45,9 @@ public class GameGrid
         {
             int x = (int) (Math.random() * width);
             int y = (int) (Math.random() * height);
+            if (allTiles.get(x).get(y).getValue() == 2)
+                j--;
+
             allTiles.get(x).get(y).initValue();
         }
 
@@ -60,37 +65,60 @@ public class GameGrid
                 {
 
                     case UP:
-                        if(t.getCoordinates().getY() - 1 >= 0)
-                            t.addToY(-1);
-                        break;
+                        if (t.getCoordinates().getY() - 1 >= 0)
+                            //t.moveOnY(-1);
+                            break;
                     case RIGHT:
-                        if(t.getCoordinates().getX() + 1 < width)
-                            t.addToX(1);
+                        if (t.getX() + 1 < width)
+                        {
+                            Tile t2 = getATile(t.getY(), t.getX() + 1);
+                            if (t2.equals(t))
+                                t2.add(t);
+                            else if (t2.getValue() == 0)
+                            {
+                                t2.setValue(t.getValue());
+                                t.setValue(0);
+                            }
+                        }
                         break;
                     case DOWN:
-                        if(t.getCoordinates().getY() + 1 < height)
-                            t.addToY(1);
+                        if (t.getY() + 1 < height)
+                        {
+                            Tile t2 = getATile(t.getY() + 1, t.getX());
+                            if (t2.equals(t))
+                                t2.add(t);
+                            else if (t2.getValue() == 0)
+                            {
+                                t2.setValue(t.getValue());
+                                t.setValue(0);
+                            }
+                        }
                         break;
                     case LEFT:
-                        if(t.getCoordinates().getX() - 1 >= 0)
-                            t.addToX(-1);
-                        break;
+                        if (t.getCoordinates().getX() - 1 >= 0)
+                            //t.moveOnX(-1);
+                            break;
                 }
             }
         }
     }
 
+    public Tile getATile(int y, int x)
+    {
+        return this.allTiles.get(y).get(x);
+    }
+
     @Override
     public String toString()
     {
-        String[][] toDisplay = new String[width][height];
+        String[][] toDisplay = new String[height][width];
         for (List<Tile> aLine :
                 allTiles)
         {
             for (Tile t :
                     aLine)
             {
-                toDisplay[t.getX()][t.getY()] = t.toString();
+                toDisplay[t.getY()][t.getX()] = t.toString();
             }
         }
 
