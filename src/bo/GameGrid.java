@@ -133,7 +133,28 @@ public class GameGrid
                     }
                 }
         }
-        
+        spawnATile();
+    }
+
+    private void spawnATile()
+    {
+        for (List<Tile> aLine :
+                allTiles)
+        {
+            for (Tile t :
+                    aLine)
+            {
+                if (t.getValue() == 0)
+                {
+                    if ((int) (Math.random() * 10) > 1)
+                    {
+                        t.initValue();
+                        return;
+                    }
+                }
+
+            }
+        }
     }
 
     public Tile getATile(int y, int x)

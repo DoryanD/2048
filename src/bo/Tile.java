@@ -19,7 +19,9 @@ public class Tile
 
     public void initValue()
     {
-        this.value = 2;
+        int val = (int) (Math.random() * 100);
+        val = val <= 75 ? 2 : 4;
+        this.value = val;
     }
 
     @Override
@@ -33,7 +35,7 @@ public class Tile
     @Override
     public String toString()
     {
-        return "" + value;//(value == 0 ? " " : value);
+        return "" + (value == 0 ? "" : value);
     }
 
     public Coordinates getCoordinates()
