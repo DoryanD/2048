@@ -1,0 +1,5 @@
+# Autogen files
+out/*
+
+# IDE prefs
+.idea/*
