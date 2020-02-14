@@ -3,6 +3,7 @@ package bo;
 import res.Direction;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class GameGrid
@@ -55,108 +56,110 @@ public class GameGrid
 
     public void move(Direction direction)
     {
-        switch (direction)
+        System.out.println("Move to " + direction.getName());
+        for (int k = 0; k < width; k++)
         {
-            case DOWN:
-                for (int i = allTiles.size()  -1; i >= 0; i--)
-                {
-                    for (int k = 0; k < allTiles.get(i).size(); k++)
-                    {
-                        Tile t = allTiles.get(i).get(k);
-                        if (t.getY() + 1 < height)
-                        {
-                            Tile t2 = getATile(t.getY() + 1, t.getX());
-                            if (t2.equals(t))
-                                t2.add(t);
-                            else if (t2.getValue() == 0)
-                            {
-                                t2.setValue(t.getValue());
-                                t.setValue(0);
-                            }
-                        }
-                    }
-                }
-                break;
-            case RIGHT:
-                for (int i = 0; i < allTiles.size(); i++)
-                {
-                    for (int k = allTiles.get(i).size() -1; k >= 0; k--)
-                    {
-                        Tile t = allTiles.get(i).get(k);
-                        if (t.getX() + 1 < width)
-                        {
-                            Tile t2 = getATile(t.getY(), t.getX() + 1);
-                            if (t2.equals(t))
-                                t2.add(t);
-                            else if (t2.getValue() == 0)
-                            {
-                                t2.setValue(t.getValue());
-                                t.setValue(0);
-                            }
-                        }
-                    }
-                }
-            case UP:
-                for (int i = 0; i < allTiles.size(); i++)
-                {
-                    for (int k = 0; k < allTiles.get(i).size(); k++)
-                    {
-                        Tile t = allTiles.get(i).get(k);
-                        if (t.getY() - 1 >= 0)
-                        {
-                            Tile t2 = getATile(t.getY() - 1, t.getX());
-                            if (t2.equals(t))
-                                t2.add(t);
-                            else if (t2.getValue() == 0)
-                            {
-                                t2.setValue(t.getValue());
-                                t.setValue(0);
-                            }
-                        }
-                    }
-                }
-            case LEFT:
-                for (int i = 0; i < allTiles.size(); i++)
-                {
-                    for (int k = 0; k < allTiles.get(i).size(); k++)
-                    {
-                        Tile t = allTiles.get(i).get(k);
-                        if (t.getX() - 1 >= 0)
-                        {
-                            Tile t2 = getATile(t.getY(), t.getX() - 1);
-                            if (t2.equals(t))
-                                t2.add(t);
-                            else if (t2.getValue() == 0)
-                            {
-                                t2.setValue(t.getValue());
-                                t.setValue(0);
-                            }
-                        }
-                    }
-                }
-        }
-        spawnATile();
-    }
 
-    private void spawnATile()
-    {
-        for (List<Tile> aLine :
-                allTiles)
-        {
-            for (Tile t :
-                    aLine)
+            switch (direction)
             {
-                if (t.getValue() == 0)
-                {
-                    if ((int) (Math.random() * 10) > 1)
-                    {
-                        t.initValue();
-                        return;
-                    }
-                }
 
+                case UP:
+                    for (int i = 0; i < allTiles.size(); i++)
+                    {
+                        for (int j = 0; j < allTiles.get(i).size(); j++)
+                        {
+                            Tile t = allTiles.get(i).get(j);
+                            if (i - 1 >= 0)
+                            {
+                                Tile t2 = getATile(i - 1, j);
+                                if (t2.equals(t))
+                                {
+                                    t2.add(t);
+                                }
+                                else if (t2.getValue() == 0)
+                                {
+                                    t2.setValue(t.getValue());
+                                    t.setValue(0);
+                                }
+                            }
+
+                        }
+                    }
+                    break;
+                case LEFT:
+                    for (int i = 0; i < allTiles.size(); i++)
+                    {
+                        for (int j = 0; j < allTiles.get(i).size(); j++)
+                        {
+                            Tile t = allTiles.get(i).get(j);
+
+                            if (j - 1 >= 0)
+                            {
+                                Tile t2 = getATile(i, j - 1);
+                                if (t2.equals(t))
+                                {
+                                    t2.add(t);
+                                }
+                                else if (t2.getValue() == 0)
+                                {
+                                    t2.setValue(t.getValue());
+                                    t.setValue(0);
+                                }
+                            }
+                        }
+                    }
+                    break;
+                case RIGHT:
+                    for (int i = 0; i < allTiles.size(); i++)
+                    {
+                        for (int j = allTiles.get(i).size() - 1; j >= 0; j--)
+                        {
+                            Tile t = allTiles.get(i).get(j);
+                            if (j + 1 < width)
+                            {
+                                Tile t2 = getATile(i, j + 1);
+                                if (t2.equals(t))
+                                {
+                                    t2.add(t);
+                                }
+                                else if (t2.getValue() == 0)
+                                {
+                                    t2.setValue(t.getValue());
+                                    t.setValue(0);
+                                }
+                            }
+                        }
+                    }
+                    break;
+                case DOWN:
+                    for (int i = allTiles.size() - 1; i >= 0; i--)
+                    {
+                        for (int j = 0; j < allTiles.get(i).size(); j++)
+                        {
+                            Tile t = allTiles.get(i).get(j);
+                            if (i + 1 < height)
+                            {
+                                Tile t2 = getATile(i + 1, j);
+                                if (t2.equals(t))
+                                {
+                                    t2.add(t);
+                                }
+                                else if (t2.getValue() == 0)
+                                {
+                                    t2.setValue(t.getValue());
+                                    t.setValue(0);
+                                }
+                            }
+                        }
+                    }
+                    break;
             }
         }
+
+        Tile aTile = allTiles.get((int) (Math.random() * height)).get((int) (Math.random() * width));
+        while (aTile.getValue() != 0)
+            aTile = allTiles.get((int) (Math.random() * height)).get((int) (Math.random() * width));
+        //aTile.initValue();
     }
 
     public Tile getATile(int y, int x)
@@ -178,16 +181,14 @@ public class GameGrid
             }
         }
 
-        String str = "";
-        for (String[] aLine :
-                toDisplay)
+        String str = "|";
+        for (int i = 0; i < toDisplay.length; i++)
         {
-            for (String s :
-                    aLine)
+            for (int j = 0; j < toDisplay[i].length; j++)
             {
-                str += " " + s + " ";
+                str += " " + toDisplay[i][j] + " ";
             }
-            str += "\n";
+            str += "|" + (i == toDisplay.length - 1 ? "" : "\n|");
         }
         return str;
     }

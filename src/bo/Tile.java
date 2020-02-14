@@ -35,7 +35,7 @@ public class Tile
     @Override
     public String toString()
     {
-        return "" + (value == 0 ? "" : value);
+        return "" + (value == 0 ? " " : value);
     }
 
     public Coordinates getCoordinates()
