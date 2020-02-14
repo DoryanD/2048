@@ -3,3 +3,6 @@ out/*
 
 # IDE prefs
 .idea/*
+
+# Main
+src/Main.java
