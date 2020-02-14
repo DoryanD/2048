@@ -1,21 +1,26 @@
-import bo.GameGrid;
-import bo.Tile;
+import ihm.IHM;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.swing.*;
 
 public class Main
 {
 
     public static void main(String[] args)
     {
-        GameGrid gg = new GameGrid();
-        gg.init();
-
-        System.out.println("------------\n");
-        System.out.println(gg);
-        System.out.println("------------");
-
+        SwingUtilities.invokeLater(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                try
+                {
+                    new IHM();
+                } catch (InterruptedException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
 }
