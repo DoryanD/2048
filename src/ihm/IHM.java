@@ -36,7 +36,7 @@ public class IHM extends JFrame
         );
 
         this.setLocationRelativeTo(null);
-        grid = new GameGrid();
+        grid = new GameGrid(4, 4, 2);
         Panel panel = new Panel(grid);
 
         this.setContentPane(panel);

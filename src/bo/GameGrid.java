@@ -3,7 +3,6 @@ package bo;
 import res.Direction;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class GameGrid
@@ -13,14 +12,6 @@ public class GameGrid
     private int              height;
     private int              nbTilesInit;
     private List<List<Tile>> allTiles = new ArrayList<>();
-
-    public GameGrid()
-    {
-        this.width = 4;
-        this.height = 4;
-        this.nbTilesInit = 2;
-        init();
-    }
 
     public GameGrid(int width, int height, int nbTilesInit)
     {
@@ -54,12 +45,11 @@ public class GameGrid
 
     }
 
-    public void move(Direction direction)
+    public int move(Direction direction)
     {
-        System.out.println("Move to " + direction.getName());
+        int ret = 0;
         for (int k = 0; k < width; k++)
         {
-
             switch (direction)
             {
 
@@ -74,12 +64,13 @@ public class GameGrid
                                 Tile t2 = getATile(i - 1, j);
                                 if (t2.equals(t))
                                 {
-                                    t2.add(t);
+                                    ret += t2.add(t);
                                 }
                                 else if (t2.getValue() == 0)
                                 {
                                     t2.setValue(t.getValue());
                                     t.setValue(0);
+                                    ret += 0;
                                 }
                             }
 
@@ -98,12 +89,13 @@ public class GameGrid
                                 Tile t2 = getATile(i, j - 1);
                                 if (t2.equals(t))
                                 {
-                                    t2.add(t);
+                                    ret += t2.add(t);
                                 }
                                 else if (t2.getValue() == 0)
                                 {
                                     t2.setValue(t.getValue());
                                     t.setValue(0);
+                                    ret += 0;
                                 }
                             }
                         }
@@ -120,12 +112,13 @@ public class GameGrid
                                 Tile t2 = getATile(i, j + 1);
                                 if (t2.equals(t))
                                 {
-                                    t2.add(t);
+                                    ret += t2.add(t);
                                 }
                                 else if (t2.getValue() == 0)
                                 {
                                     t2.setValue(t.getValue());
                                     t.setValue(0);
+                                    ret += 0;
                                 }
                             }
                         }
@@ -142,12 +135,13 @@ public class GameGrid
                                 Tile t2 = getATile(i + 1, j);
                                 if (t2.equals(t))
                                 {
-                                    t2.add(t);
+                                    ret += t2.add(t);
                                 }
                                 else if (t2.getValue() == 0)
                                 {
                                     t2.setValue(t.getValue());
                                     t.setValue(0);
+                                    ret += 0;
                                 }
                             }
                         }
@@ -160,6 +154,8 @@ public class GameGrid
         while (aTile.getValue() != 0)
             aTile = allTiles.get((int) (Math.random() * height)).get((int) (Math.random() * width));
         aTile.initValue();
+
+        return ret;
     }
 
     public Tile getATile(int y, int x)

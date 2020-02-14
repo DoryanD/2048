@@ -60,7 +60,6 @@ public class Panel extends JPanel
                 String value = grid.getATile(y,x).toString();
                 if(!value.equals("")){
                     int quotient = 0;
-                    System.out.println(value);
                     int reste = Integer.parseInt(value);
                     while(reste > 2){
                         reste /= 2;

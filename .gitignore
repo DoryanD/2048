@@ -3,3 +3,6 @@ out/*
 
 # IDE prefs
 .idea/*
+
+# Not my shit
+src/ihm/*

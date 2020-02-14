@@ -11,10 +11,11 @@ public class Tile
         this.coordinates = new Coordinates(x, y);
     }
 
-    public void add(Tile t)
+    public int add(Tile t)
     {
         this.setValue(t.getValue() + this.getValue());
         t.setValue(0);
+        return this.getValue();
     }
 
     public void initValue()
@@ -35,7 +36,7 @@ public class Tile
     @Override
     public String toString()
     {
-        return "" + (value == 0 ? "" : value);
+        return "" + (value == 0 ? " " : value);
     }
 
     public Coordinates getCoordinates()
