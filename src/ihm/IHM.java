@@ -1,6 +1,7 @@
 package ihm;
 
 import bo.GameGrid;
+import bo.GameManager;
 import res.Direction;
 
 import javax.swing.*;
@@ -16,6 +17,7 @@ import java.util.Map;
 public class IHM extends JFrame
 {
 
+    private GameManager gm;
     private GameGrid                   grid;
     private Long                       startTime;
     private Long                       animationDuration = 10l;
@@ -36,8 +38,10 @@ public class IHM extends JFrame
         );
 
         this.setLocationRelativeTo(null);
-        grid = new GameGrid(4, 4, 2);
-        Panel panel = new Panel(grid);
+        gm = new GameManager();
+        gm.newGame();
+        grid = gm.getGameGrid();
+        Panel panel = new Panel(gm);
 
         this.setContentPane(panel);
 

@@ -52,7 +52,6 @@ public class GameGrid
         {
             switch (direction)
             {
-
                 case UP:
                     for (int i = 0; i < allTiles.size(); i++)
                     {
@@ -83,7 +82,6 @@ public class GameGrid
                         for (int j = 0; j < allTiles.get(i).size(); j++)
                         {
                             Tile t = allTiles.get(i).get(j);
-
                             if (j - 1 >= 0)
                             {
                                 Tile t2 = getATile(i, j - 1);
