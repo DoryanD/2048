@@ -10,11 +10,11 @@ public class Main
 
         show();
 
-        gg.move(Direction.DOWN);
+        gg.move(Direction.UP);
 
         show();
 
-        gg.move(Direction.RIGHT);
+        gg.move(Direction.LEFT);
 
         show();
 

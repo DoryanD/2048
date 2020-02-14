@@ -17,7 +17,7 @@ public class GameGrid
     {
         this.width = 4;
         this.height = 4;
-        this.nbTilesInit = 3;
+        this.nbTilesInit = 2;
         init();
     }
 
@@ -55,52 +55,85 @@ public class GameGrid
 
     public void move(Direction direction)
     {
-        for (List<Tile> aLine :
-                allTiles)
+        switch (direction)
         {
-            for (Tile t :
-                    aLine)
-            {
-                switch (direction)
+            case DOWN:
+            case RIGHT:
+                for (List<Tile> allTile : allTiles)
                 {
-
-                    case UP:
-                        if (t.getCoordinates().getY() - 1 >= 0)
-                            //t.moveOnY(-1);
-                            break;
-                    case RIGHT:
-                        if (t.getX() + 1 < width)
+                    for (Tile t : allTile)
+                    {
+                        switch (direction)
                         {
-                            Tile t2 = getATile(t.getY(), t.getX() + 1);
-                            if (t2.equals(t))
-                                t2.add(t);
-                            else if (t2.getValue() == 0)
-                            {
-                                t2.setValue(t.getValue());
-                                t.setValue(0);
-                            }
+                            case DOWN:
+                                if (t.getY() + 1 < height)
+                                {
+                                    Tile t2 = getATile(t.getY() + 1, t.getX());
+                                    if (t2.equals(t))
+                                        t2.add(t);
+                                    else if (t2.getValue() == 0)
+                                    {
+                                        t2.setValue(t.getValue());
+                                        t.setValue(0);
+                                    }
+                                }
+                                break;
+                            case RIGHT:
+                                if (t.getX() + 1 < width)
+                                {
+                                    Tile t2 = getATile(t.getY(), t.getX() + 1);
+                                    if (t2.equals(t))
+                                        t2.add(t);
+                                    else if (t2.getValue() == 0)
+                                    {
+                                        t2.setValue(t.getValue());
+                                        t.setValue(0);
+                                    }
+                                }
+                                break;
                         }
-                        break;
-                    case DOWN:
-                        if (t.getY() + 1 < height)
-                        {
-                            Tile t2 = getATile(t.getY() + 1, t.getX());
-                            if (t2.equals(t))
-                                t2.add(t);
-                            else if (t2.getValue() == 0)
-                            {
-                                t2.setValue(t.getValue());
-                                t.setValue(0);
-                            }
-                        }
-                        break;
-                    case LEFT:
-                        if (t.getCoordinates().getX() - 1 >= 0)
-                            //t.moveOnX(-1);
-                            break;
+                    }
                 }
-            }
+            case UP:
+            case LEFT:
+                for (int i = allTiles.size() - 1; i >= 0; i--)
+                {
+                    for (int k = allTiles.get(i).size() - 1; k >= 0; k--)
+                    {
+                        Tile t = allTiles.get(i).get(k);
+                        switch (direction)
+                        {
+                            case UP:
+                                if (t.getY() - 1 >= 0)
+                                {
+                                    Tile t2 = getATile(t.getY() - 1, t.getX());
+                                    if (t2.equals(t))
+                                        t2.add(t);
+                                    else if (t2.getValue() == 0)
+                                    {
+                                        t2.setValue(t.getValue());
+                                        t.setValue(0);
+                                    }
+                                }
+                                break;
+                            case LEFT:
+                                if (t.getX() - 1 >= 0)
+                                {
+                                    Tile t2 = getATile(t.getY(), t.getX() - 1);
+                                    if (t2.equals(t))
+                                        t2.add(t);
+                                    else if (t2.getValue() == 0)
+                                    {
+                                        t2.setValue(t.getValue());
+                                        t.setValue(0);
+                                    }
+                                }
+                                break;
+                        }
+                    }
+                }
         }
+        
     }
 
     public Tile getATile(int y, int x)
